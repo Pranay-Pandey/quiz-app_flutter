@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/response.dart';
 
 class ResultScreen extends StatelessWidget {
-  ResultScreen(
+  const ResultScreen(
       {super.key,
       required this.questionText,
       required this.answers,
@@ -12,7 +12,7 @@ class ResultScreen extends StatelessWidget {
   final List<String> questionText;
   final List<String> answers;
   final List<String> response;
-  Function resetQuiz;
+  final Function resetQuiz;
 
   List<Map<String, Object>> results() {
     List<Map<String, Object>> results = [];
