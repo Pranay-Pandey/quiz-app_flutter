@@ -43,8 +43,8 @@ class Response extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start, // Left-align text
                       children: [
-                        Align(
-                          child: Text(
+                        // Align(
+                          Text(
                             e['question'].toString(),
                             style: const TextStyle(
                               color: Colors.white,
@@ -52,7 +52,7 @@ class Response extends StatelessWidget {
                               fontSize: 15,
                             ),
                           ),
-                        ),
+                        // ),
                         Text(
                           e['answer'].toString(),
                           style: const TextStyle(
