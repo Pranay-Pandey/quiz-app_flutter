@@ -16,12 +16,24 @@ class Response extends StatelessWidget {
               children: [
                 SizedBox(
                   width: 50,
-                  child: Text(
-                    e['id'].toString(),
-                    style:  TextStyle(
-                        color: Colors.white,
-                        backgroundColor: (e['answer'].toString()==e['response'].toString())?Colors.blue:Colors.green,
+                  child: Container(
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 2),
+                        shape: BoxShape.circle,
+                        color: (e['answer'] == e['response'])
+                            ? Colors.green
+                            : Colors.red),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          e['id'].toString(),
                         ),
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(

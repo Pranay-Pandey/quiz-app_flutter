@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/response.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen(
+  ResultScreen(
       {super.key,
       required this.questionText,
       required this.answers,
-      required this.response});
+      required this.response, 
+      required this.resetQuiz});
 
   final List<String> questionText;
   final List<String> answers;
   final List<String> response;
+  Function resetQuiz;
 
   List<Map<String, Object>> results() {
     List<Map<String, Object>> results = [];
@@ -40,14 +42,45 @@ class ResultScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                  "You answered $correctAnswers out of $totalQuestions questions correctly!"),
+              RichText(
+                text: TextSpan(
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                  children: <TextSpan>[
+                    const TextSpan(
+                      text: "You answered ",
+                    ),
+                    TextSpan(
+                      text: correctAnswers
+                          .toString(), // Display the correctAnswers variable here
+                      style: const TextStyle(
+                        color: Colors.green, // Style this part in green color
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const TextSpan(
+                      text: " out of ",
+                    ),
+                    TextSpan(
+                      text: totalQuestions
+                          .toString(), // Display the totalQuestions variable here
+                    ),
+                    const TextSpan(
+                      text: " questions correctly!",
+                    ),
+                  ],
+                ),
+              ),
               const SizedBox(height: 40),
               Response(
                 result,
               ),
               const SizedBox(height: 40),
-              TextButton(onPressed: () {}, child: const Text("Reset quiz"))
+              TextButton(onPressed: (){resetQuiz();}, child: const Text("Reset quiz"))
             ],
           ),
         ));

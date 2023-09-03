@@ -26,33 +26,41 @@ class _QuizState extends State<Quiz> {
     });
   }
 
-  void addEntry(String question, String answer, String reponse){
+  void addEntry(String question, String answer, String reponse) {
     setState(() {
       questionsText.add(question);
       response.add(reponse);
       answers.add(answer);
 
-      if (questionsText.length == questions.length){
+      if (questionsText.length == questions.length) {
         currentScreen = 'result-Screen';
       }
-
     });
+  }
 
+  void resetQuiz() {
+    setState(() {
+      questionsText = [];
+      response = [];
+      answers = [];
+      currentScreen = 'Welcome-Screen';
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     Widget? screen;
-    if (currentScreen == 'Welcome-Screen'){
+    if (currentScreen == 'Welcome-Screen') {
       screen = Welcome(changeScreen);
-    } 
-    else if (currentScreen == 'Question-Screen') {
+    } else if (currentScreen == 'Question-Screen') {
       screen = QuestionScreen(addEntry);
-    }
-    else if (currentScreen == 'result-Screen'){
-      screen = ResultScreen(questionText: questionsText, answers: answers, response: response);
-    }
-    else {
+    } else if (currentScreen == 'result-Screen') {
+      screen = ResultScreen(
+          questionText: questionsText,
+          answers: answers,
+          response: response,
+          resetQuiz: resetQuiz);
+    } else {
       screen = Welcome(changeScreen);
     }
 
