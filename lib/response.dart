@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Response extends StatelessWidget {
-  Response(this.results, {super.key});
+  const Response(this.results, {Key? key}) : super(key: key);
 
   final List<Map<String, Object>> results;
 
@@ -12,42 +12,68 @@ class Response extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: results.map((e) {
-            return Row(
-              children: [
-                SizedBox(
-                  width: 50,
-                  child: Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
+            return Container(
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 50,
+                    child: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
                         border: Border.all(width: 2),
                         shape: BoxShape.circle,
                         color: (e['answer'] == e['response'])
                             ? Colors.green
-                            : Colors.red),
+                            : Colors.red,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            e['id'].toString(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
+                      crossAxisAlignment: CrossAxisAlignment.start, // Left-align text
+                      children: [
+                        Align(
+                          child: Text(
+                            e['question'].toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
                         Text(
-                          e['id'].toString(),
+                          e['answer'].toString(),
+                          style: const TextStyle(
+                            color: Color.fromARGB(255, 217, 3, 255),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                        Text(
+                          e['response'].toString(),
+                          style: const TextStyle(
+                            color: Color.fromARGB(255, 251, 236, 255),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Text(e['question'].toString()),
-                      const SizedBox(height: 10),
-                      Text(e['answer'].toString()),
-                      const SizedBox(height: 10),
-                      Text(e['response'].toString()),
-                    ],
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             );
           }).toList(),
         ),
