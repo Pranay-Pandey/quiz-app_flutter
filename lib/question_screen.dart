@@ -82,11 +82,16 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 height: 30,
               ),
               ...questions[cur_index].getShuffledAnswers().map((element) {
-                return Answer(
-                  element,
-                  () {
-                    nextQuestion(element);
-                  },
+                return Column(
+                  children: [
+                    Answer(
+                      element,
+                      () {
+                        nextQuestion(element);
+                      },
+                    ),
+                    const SizedBox(height: 10)
+                  ],
                 );
               }),
             ],
